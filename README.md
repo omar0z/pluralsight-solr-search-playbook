@@ -40,6 +40,8 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Customizing the tool
 
+Install the dependencies using `yarn install`.
+
 Edit the `enviroments.ts` file to input:
 - The address of your solr instance
 - Your Solr core
