@@ -1,0 +1,55 @@
+.viewport {
+  min-height: 100vh;
+}
+
+.header {
+  height: 60px;
+  background-color: #2cabe3;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /*ridiculous value to ensure layering*/
+}
+
+.header .header-logo {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  width: 180px;
+}
+
+.header .menu-button {
+  height: 60px;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #fff;
+  min-width: 60px;
+}
+
+.header .menu-right {
+  margin-right: 20px;
+}
+
+.sidebar {
+  background-color: #2A2C36;
+  width: 250px;
+}
+
+.sidebar.mobile {
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+  z-index: 1;
+}
+
+.content {
+  background-color: #edf1f5;
+}
+
+.nav-active {
+  background-color: #ff5252;
+}
+
+.nav-active md-icon {
+  color: #fff;
+}
+
+

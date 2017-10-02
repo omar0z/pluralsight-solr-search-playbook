@@ -1,0 +1,34 @@
+<div fxLayout="column" class="mat-app-background viewport">
+  <div fxLayout="row" class="header">
+    <div fxLayoutAlign="center center" fxFlex.gt-sm="250px" class="header-logo"><img src="assets/images/DORIS.png"/></div>
+    <div fxFlex fxLayoutAlign="start center">
+      <button (click)="onMenuClick()" mdTooltip="Show/Hide Menu" md-button class="menu-button"><md-icon>menu</md-icon></button>
+    </div>
+    <div fxFlex fxLayoutAlign="end center" class="menu-right">
+      <button md-button class="menu-button" ><md-icon class="md-48">account_circle</md-icon></button>
+    </div>
+  </div>
+  <div fxFlex="1" fxLayout="row">
+    <div class="doris-dark-theme sidebar" [ngClass]="{'mobile': showMenu && (activeMediaQuery=='xs' || activeMediaQuery=='sm')}" *ngIf="showMenu">
+
+      <md-nav-list>
+        <md-list-item routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}">
+          <md-icon md-list-icon>dashboard</md-icon>
+          <h3 md-line> Dashboard </h3>
+        </md-list-item>
+        <md-list-item routerLink="/page1" routerLinkActive="nav-active">
+          <md-icon md-list-icon>dashboard</md-icon>
+          <h3 md-line> Page 1 </h3>
+        </md-list-item>
+        <md-list-item routerLink="/page2" routerLinkActive="nav-active">
+          <md-icon md-list-icon>dashboard</md-icon>
+          <h3 md-line> Page 2 </h3>
+        </md-list-item>
+      </md-nav-list>
+
+    </div>
+    <div fxFlex class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

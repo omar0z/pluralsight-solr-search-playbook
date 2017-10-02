@@ -1,0 +1,17 @@
+<div id="static">
+
+  <search (onkeyStroke)="search($event)"></search>
+  <clustering [subject]="subject" (onClusterSelected)="getSelectedCluster($event)"></clustering>
+</div>
+<div fxLayout="column" fxFlex class="content">
+  <md-card fxFlex *ngFor="let doc of documentsOnDisplay" style="margin-bottom: 20px">
+    <md-card-title>
+      <a href="#" target="_blank">
+        <h3>This is your document title (it usually links with your content)</h3>
+      </a>
+    </md-card-title>
+    <md-card-content>
+      This is your document text. Usually this text contains an abstract of the content of your clustered documents.
+    </md-card-content>
+  </md-card>
+</div>
