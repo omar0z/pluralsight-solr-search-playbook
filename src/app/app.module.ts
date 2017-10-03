@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, APP_INITIALIZER} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -23,6 +23,7 @@ import {SearchBarComponent} from "./pages/dashboard/searchbar.component";
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     FlexLayoutModule,
     AppRoutingModule,

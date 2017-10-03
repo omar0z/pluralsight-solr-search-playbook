@@ -7,7 +7,7 @@
 
 export const environment = {
   production: false,
-  server:"http://s-cnect-dev-crwl:8983/",
-  core:"test",
-  sourceSchemaField: "text"
+  server: "http://s-cnect-dev-crwl:8983/",
+  core: "testme_test",
+  sourceSchemaField: "teaser"
 };

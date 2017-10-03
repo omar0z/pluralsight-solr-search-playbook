@@ -47,7 +47,7 @@ Edit the `enviroments.ts` file to input:
 - Your Solr core
 - The source text field where the clustering will be based on
 
-Edit the `dashboard-page.component.html` to customize the view bindings according to your Solr schema.
+Edit the `dashboard-page.component.html` to customize the view bindings according to your Solr schema. The tool is already configured to fetch, display and iterate over your data (`*ngFor="let doc of documentsOnDisplay"`). Just use the angular notation (`{{doc.your_field_here}}`) to create the necessary bindings on the card title and on the card content to get started!.
 
 ## Any problem?
 Contact us! : CNECT-ECDORIS@ec.europa.eu

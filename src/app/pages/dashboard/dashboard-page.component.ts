@@ -35,7 +35,7 @@ export class DashboardPageComponent implements OnInit {
 
   public getData() {
     this.service.getData(this.queryString).subscribe(result => {
-      let object = result.json();
+      const object = result.json();
       this.queryString = "";
       this.documents = object.response.docs;
       this.documentsOnDisplay = object.response.docs;
@@ -49,9 +49,9 @@ export class DashboardPageComponent implements OnInit {
   }
 
   adaptKeysToFoamTreeFormat(clusterArray: Array<any>): Array<any> {
-    let targetArray: Array<any> = new Array();
-    for (let object of clusterArray) {
-      let targetObject = {
+    const targetArray: Array<any> = new Array();
+    for (const object of clusterArray) {
+      const targetObject = {
         label: object.labels[0],
         weight: object.score,
         docs: object.docs
@@ -61,9 +61,9 @@ export class DashboardPageComponent implements OnInit {
     return targetArray;
   }
 
-  getSelectedCluster(data:any) {
-    if(data){
-      let clusterDocIds = data.groups[0].docs;
+  getSelectedCluster(data: any) {
+    if (data) {
+      const clusterDocIds = data.groups[0].docs;
       this.documentsOnDisplay = _.filter(this.documents, function(object){
         return clusterDocIds.includes(object.id);
       })
@@ -71,7 +71,7 @@ export class DashboardPageComponent implements OnInit {
 
   }
 
-  search(data:any) {
+  search(data: string) {
     this.queryString = data;
     this.getData();
   }

@@ -5,6 +5,9 @@ import {
   Component, Input, HostListener, OnDestroy, OnInit, EventEmitter, Output, Injectable, NgZone, ApplicationRef
 } from "@angular/core";
 
+import { FormControl } from '@angular/forms';
+
+
 
 /**
  * Created by perezom on 25/09/2017.
@@ -21,24 +24,19 @@ export class SearchBarComponent {
   private queryString: string;
   private keyPressTimeout: number;
 
+  private term: FormControl = new FormControl();
+
   @Output()
   onkeyStroke: EventEmitter<any> = new EventEmitter();
 
 
   constructor() {
+    this.term.valueChanges
+    .debounceTime(800)
+    .distinctUntilChanged()
+    .subscribe(term => this.onkeyStroke.emit(term));
   }
 
-  @HostListener('document:keypress')
-  onKeyPress() {
-    if (this.keyPressTimeout) {
-      this.keyPressTimeout = 0;
-    }
-    if (this.queryString) {
-      this.keyPressTimeout = setTimeout((() => {
-        this.onkeyStroke.emit(this.queryString)
-      }).bind(this), 100);
-    }
-  }
 
   onClick() {
     console.log("this.queryString: ", this.queryString);

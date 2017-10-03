@@ -1,6 +1,6 @@
 <md-toolbar class="toolbar" style="padding-top: 20px">
   <button md-raised-button style="margin-right: 10px;" color="primary" (click)="onClick()"><md-icon>search</md-icon></button>
   <md-input-container fxFill>
-    <input mdInput placeholder="Search" [(ngModel)]="queryString">
+    <input mdInput placeholder="Search" [formControl]="term">
   </md-input-container>
 </md-toolbar>
