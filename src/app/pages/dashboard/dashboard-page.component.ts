@@ -1,6 +1,6 @@
-import {Component, OnInit, Output, EventEmitter, Input, HostListener} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../app.service";
-import {Subject, Subscription} from "rxjs";
+import {Subject} from "rxjs";
 
 import * as _ from "lodash";
 

@@ -1,6 +1,5 @@
 import {
-  Component, Input, HostListener, OnDestroy, OnInit, EventEmitter, Output, Injectable, NgZone, ApplicationRef
-} from "@angular/core";
+  Component, Input, HostListener, OnDestroy, OnInit, EventEmitter, Output} from "@angular/core";
 import {Subject} from "rxjs";
 
 /**
@@ -24,9 +23,7 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
   onClusterSelected: EventEmitter<any> = new EventEmitter();
 
 
-  constructor() {
-    //this.onClusterSelected = new EventEmitter<any>();
-  }
+  constructor() {}
 
   ngOnInit() {
     this.subject.subscribe(event => {
@@ -61,7 +58,7 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
 
   @HostListener('click')
   onFoamtreeContainerClick() {
-    let selectedCluster = this.foamtree.get("selection");
+    const selectedCluster = this.foamtree.get("selection");
     this.onClusterSelected.emit(selectedCluster);
   }
 
