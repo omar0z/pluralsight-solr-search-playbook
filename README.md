@@ -18,6 +18,9 @@ This project has the purpose to serve as base to visualize DORIS clustering appl
 ## Details
 This project was generated with angular-cli and contains the base with the homepage and DORIS logo to initiate the application and the integration with EU Login in NodeJS side.
 
+## Before you run the application
+Make sure you install the app dependencies by running `yarn install`. If you skip this step, the app won't run in any environment.
+
 ## Development Environment
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
@@ -39,8 +42,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Customizing the tool
-
-Install the dependencies using `yarn install`.
 
 Edit the `enviroments.ts` file to input:
 - The address of your solr instance
