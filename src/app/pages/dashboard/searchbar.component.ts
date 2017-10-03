@@ -28,7 +28,7 @@ export class SearchBarComponent {
   }
 
   onClick() {
-    if (this.queryString || this.queryString === "") {
+    if (!this.queryString || this.queryString === "") {
       this.queryString = "*";
     }
     this.onkeyStroke.emit(this.queryString);
