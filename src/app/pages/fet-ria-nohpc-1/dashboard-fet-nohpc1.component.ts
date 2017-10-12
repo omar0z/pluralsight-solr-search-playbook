@@ -5,11 +5,11 @@ import {Subject} from "rxjs";
 import * as _ from "lodash";
 
 @Component({
-  selector: 'dashboard-page',
-  templateUrl: './dashboard-page.component.html',
-  styleUrls:['./dashboard-page.component.css']
+  selector: 'fet-nohpc1-page',
+  templateUrl: './dashboard-fet-nohpc1.component.html',
+  styleUrls:['./dashboard-fet-nohpc1.component.css']
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardFetNoHPC1Component implements OnInit {
 
   private documents: Array<any>;
   private documentsOnDisplay: Array<any>;
@@ -33,7 +33,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   public getData() {
-    this.service.getDataFirstCore(this.queryString).subscribe(result => {
+    this.service.getDataSecondCore(this.queryString).subscribe(result => {
       const object = result.json();
       this.queryString = "";
       this.documents = object.response.docs;

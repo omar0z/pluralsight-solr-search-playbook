@@ -10,13 +10,17 @@ import {DashboardPageComponent} from "./pages/dashboard/dashboard-page.component
 import {AppRoutingModule} from "./modules/app-routing.module";
 import {AppMaterialModule} from "./modules/app-material.module";
 import {AppService} from "./app.service";
-import {FoamTreeClusteringComponent} from "./pages/dashboard/foamtree.component";
-import {SearchBarComponent} from "./pages/dashboard/searchbar.component";
+import {FoamTreeClusteringComponent} from "./shared/foamtree/foamtree.component";
+import {SearchBarComponent} from "./shared/searchbar/searchbar.component";
+import {DashboardFetNoHPC1Component} from "./pages/fet-ria-nohpc-1/dashboard-fet-nohpc1.component";
+import {DashboardFetNoHPC2Component} from "./pages/fet-ria-nohpc-2/dashboard-fet-nohpc2.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardPageComponent,
+    DashboardFetNoHPC1Component,
+    DashboardFetNoHPC2Component,
     FoamTreeClusteringComponent,
     SearchBarComponent
   ],

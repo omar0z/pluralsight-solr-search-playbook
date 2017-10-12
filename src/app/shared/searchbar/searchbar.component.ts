@@ -12,7 +12,6 @@ import { FormControl } from "@angular/forms";
 @Component({
   selector: "search",
   templateUrl: "./searchbar.component.html",
-  styleUrls: ["./dashboard-page.component.css"]
 })
 export class SearchBarComponent {
   private queryString: string;

@@ -13,12 +13,35 @@ export class AppService {
   constructor(private http: Http) {
   }
 
-  public getData(queryString : String): Observable<any> {
+  public getDataFirstCore(queryString : String): Observable<any> {
     if(!queryString){
       queryString = "*";
     }
     //
-    return this.http.get(environment.server+ "solr/"+environment.core+"/clustering?indent=on&q="+environment.sourceSchemaField+":*"+queryString+"*&rows=500&wt=json")
+    return this.http.get(environment.server+ "solr/"+environment.core1+"/clustering?indent=on&q="+environment.sourceSchemaField1+":*"+queryString+"*&rows=500&wt=json")
+      .map((res: Response) => {
+        return res;
+      });
+  }
+
+  public getDataSecondCore(queryString : String): Observable<any> {
+    if(!queryString){
+      queryString = "*";
+    }
+    //
+    return this.http.get(environment.server+ "solr/"+environment.core2+"/clustering?indent=on&q="+environment.sourceSchemaField2+":*"+queryString+"*&rows=500&wt=json")
+      .map((res: Response) => {
+        return res;
+      });
+  }
+
+
+  public getDataThirdCore(queryString : String): Observable<any> {
+    if(!queryString){
+      queryString = "*";
+    }
+    //
+    return this.http.get(environment.server+ "solr/"+environment.core3+"/clustering?indent=on&q="+environment.sourceSchemaField1+":*"+queryString+"*&rows=500&wt=json")
       .map((res: Response) => {
         return res;
       });

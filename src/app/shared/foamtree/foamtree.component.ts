@@ -10,7 +10,6 @@ declare var CarrotSearchFoamTree: any;
 @Component({
   selector: 'clustering',
   templateUrl: './foamtree.component.html',
-  styleUrls: ['./dashboard-page.component.css']
 })
 export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
 
