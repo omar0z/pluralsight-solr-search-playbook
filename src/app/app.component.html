@@ -11,7 +11,7 @@
   <div fxFlex="1" fxLayout="row">
     <div class="doris-dark-theme sidebar" [ngClass]="{'mobile': showMenu && (activeMediaQuery=='xs' || activeMediaQuery=='sm')}" *ngIf="showMenu">
 
-      <md-nav-list>
+      <md-nav-list id="static">
         <md-list-item routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}">
           <md-icon md-list-icon>dashboard</md-icon>
           <h3 md-line> Clustering Innovation + Proposals </h3>

@@ -25,12 +25,12 @@
 }
 
 .header .menu-right {
-  margin-right: 20px;
+  margin-right: 50px;
 }
 
 .sidebar {
   background-color: #2A2C36;
-  width: 250px;
+  width: 350px;
 }
 
 .sidebar.mobile {
@@ -52,4 +52,15 @@
   color: #fff;
 }
 
+#static {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  z-index: 1000; /*ridiculous value to ensure layering*/
+  background-color: #2A2C36;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 30px -6px black;
+  padding:25px;
+}
 

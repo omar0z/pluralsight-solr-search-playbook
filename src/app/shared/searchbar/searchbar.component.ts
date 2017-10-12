@@ -14,8 +14,8 @@ import { FormControl } from "@angular/forms";
   templateUrl: "./searchbar.component.html",
 })
 export class SearchBarComponent {
-  private queryString: string;
-  private term: FormControl = new FormControl();
+  public queryString: string;
+  public term: FormControl = new FormControl();
 
   @Output() onkeyStroke: EventEmitter<any> = new EventEmitter();
 

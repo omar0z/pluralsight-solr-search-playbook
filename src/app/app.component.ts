@@ -9,9 +9,9 @@ import {Subscription} from "rxjs";
 })
 export class AppComponent {
 
-  private watcher: Subscription;
-  private activeMediaQuery = "";
-  private showMenu = false;
+  public watcher: Subscription;
+  public activeMediaQuery = "";
+  public showMenu = false;
 
   constructor(private media: ObservableMedia) {
     this.watcher = media.subscribe((change: MediaChange) => {

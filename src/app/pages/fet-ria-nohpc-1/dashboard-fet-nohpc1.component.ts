@@ -11,11 +11,11 @@ import * as _ from "lodash";
 })
 export class DashboardFetNoHPC1Component implements OnInit {
 
-  private documents: Array<any>;
-  private documentsOnDisplay: Array<any>;
-  private clusters: Array<any>;
-  private queryString: String;
-  private subject: Subject<Array<any>>;
+  public documents: Array<any>;
+  public documentsOnDisplay: Array<any>;
+  public clusters: Array<any>;
+  public queryString: String;
+  public subject: Subject<Array<any>>;
 
 
 
