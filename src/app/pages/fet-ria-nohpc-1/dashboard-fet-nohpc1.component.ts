@@ -49,19 +49,22 @@ export class DashboardFetNoHPC1Component implements OnInit {
 
   adaptKeysToFoamTreeFormat(clusterArray: Array<any>): Array<any> {
     const targetArray: Array<any> = new Array();
-    for (const object of clusterArray) {
-      const targetObject = {
-        label: object.labels[0],
-        weight: object.score,
-        docs: object.docs
+    if(clusterArray){
+      for (const object of clusterArray) {
+        const targetObject = {
+          label: object.labels[0],
+          weight: object.score,
+          docs: object.docs,
+          groups: this.adaptKeysToFoamTreeFormat(object.clusters)
+        }
+        targetArray.push(targetObject);
       }
-      targetArray.push(targetObject);
     }
     return targetArray;
   }
 
   getSelectedCluster(data: any) {
-    if (data) {
+    if (data && data.groups) {
       const clusterDocIds = data.groups[0].docs;
       this.documentsOnDisplay = _.filter(this.documents, function(object){
         return clusterDocIds.includes(object.id);

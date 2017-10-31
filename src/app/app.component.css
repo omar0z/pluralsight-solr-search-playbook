@@ -52,10 +52,10 @@
   color: #fff;
 }
 
-#static {
+.static {
   position: -webkit-sticky;
   position: sticky;
-  top: 80px;
+  /*top: 80px;*/
   z-index: 1000; /*ridiculous value to ensure layering*/
   background-color: #2A2C36;
   -webkit-box-shadow: 0 8px 6px -6px black;

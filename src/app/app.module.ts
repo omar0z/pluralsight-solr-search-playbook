@@ -14,6 +14,7 @@ import {FoamTreeClusteringComponent} from "./shared/foamtree/foamtree.component"
 import {SearchBarComponent} from "./shared/searchbar/searchbar.component";
 import {DashboardFetNoHPC1Component} from "./pages/fet-ria-nohpc-1/dashboard-fet-nohpc1.component";
 import {DashboardFetNoHPC2Component} from "./pages/fet-ria-nohpc-2/dashboard-fet-nohpc2.component";
+import {ClusterDataService} from "./shared/cluster-data.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {DashboardFetNoHPC2Component} from "./pages/fet-ria-nohpc-2/dashboard-fet
     AppRoutingModule,
     AppMaterialModule
   ],
-  providers: [AppService],
+  providers: [AppService, ClusterDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

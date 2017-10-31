@@ -1,17 +1,23 @@
 <div fxLayout="column" class="mat-app-background viewport">
   <div fxLayout="row" class="header">
-    <div fxLayoutAlign="center center" fxFlex.gt-sm="250px" class="header-logo"><img src="assets/images/DORIS.png"/></div>
+    <div fxLayoutAlign="center center" fxFlex.gt-sm="250px" class="header-logo"><img src="assets/images/DORIS.png"/>
+    </div>
     <div fxFlex fxLayoutAlign="start center">
-      <button (click)="onMenuClick()" mdTooltip="Show/Hide Menu" md-button class="menu-button"><md-icon>menu</md-icon></button>
+      <button (click)="onMenuClick()" mdTooltip="Show/Hide Menu" md-button class="menu-button">
+        <md-icon>menu</md-icon>
+      </button>
     </div>
     <div fxFlex fxLayoutAlign="end center" class="menu-right">
-      <button md-button class="menu-button" ><md-icon class="md-48">account_circle</md-icon></button>
+      <button md-button class="menu-button">
+        <md-icon class="md-48">account_circle</md-icon>
+      </button>
     </div>
   </div>
   <div fxFlex="1" fxLayout="row">
-    <div class="doris-dark-theme sidebar" [ngClass]="{'mobile': showMenu && (activeMediaQuery=='xs' || activeMediaQuery=='sm')}" *ngIf="showMenu">
+    <div class="doris-dark-theme sidebar"
+         [ngClass]="{'mobile': showMenu && (activeMediaQuery=='xs' || activeMediaQuery=='sm')}" *ngIf="showMenu">
 
-      <md-nav-list id="static">
+      <md-nav-list class="static" style="top:80px">
         <md-list-item routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}">
           <md-icon md-list-icon>dashboard</md-icon>
           <h3 md-line> Clustering Innovation + Proposals </h3>
@@ -25,6 +31,15 @@
           <h3 md-line> Clustering no HPC 2 </h3>
         </md-list-item>
       </md-nav-list>
+
+
+      <md-card *ngIf="clusterOnHover !== undefined" class="static" style="margin-top: 50px; top:305px">
+        <ul>
+          <li>Last cluster on hover: {{clusterOnHover.label}}</li>
+          <li>Number of sub-clusters: {{clusterOnHover.groups.length}}</li>
+          <li>Total documents: {{clusterOnHover.nbOfDocs}}</li>
+        </ul>
+      </md-card>
 
     </div>
     <div fxFlex class="content">

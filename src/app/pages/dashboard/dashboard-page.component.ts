@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter} from '@angular/core';
 import {AppService} from "../../app.service";
 import {Subject} from "rxjs";
 
 import * as _ from "lodash";
+import {Output} from "@angular/core";
 
 @Component({
   selector: 'dashboard-page',
   templateUrl: './dashboard-page.component.html',
-  styleUrls:['./dashboard-page.component.css']
+  styleUrls: ['./dashboard-page.component.css']
 })
 export class DashboardPageComponent implements OnInit {
 
@@ -17,6 +18,8 @@ export class DashboardPageComponent implements OnInit {
   public queryString: String;
   public subject: Subject<Array<any>>;
 
+  @Output()
+  clusterOnHover: EventEmitter<Object> = new EventEmitter();
 
 
   constructor(public service: AppService) {
@@ -49,25 +52,32 @@ export class DashboardPageComponent implements OnInit {
 
   adaptKeysToFoamTreeFormat(clusterArray: Array<any>): Array<any> {
     const targetArray: Array<any> = new Array();
-    for (const object of clusterArray) {
-      const targetObject = {
-        label: object.labels[0],
-        weight: object.score,
-        docs: object.docs
+    if (clusterArray) {
+      for (const object of clusterArray) {
+        const targetObject = {
+          label: object.labels[0],
+          weight: object.score,
+          docs: object.docs,
+          groups: this.adaptKeysToFoamTreeFormat(object.clusters)
+        }
+        targetArray.push(targetObject);
       }
-      targetArray.push(targetObject);
     }
     return targetArray;
   }
 
   getSelectedCluster(data: any) {
-    if (data) {
+    if (data && data.groups[0]) {
       const clusterDocIds = data.groups[0].docs;
-      this.documentsOnDisplay = _.filter(this.documents, function(object){
+      this.documentsOnDisplay = _.filter(this.documents, function (object) {
         return clusterDocIds.includes(object.id);
       })
     }
 
+  }
+
+  emitClusterHover(data) {
+    this.clusterOnHover.emit(data);
   }
 
   search(data: string) {
