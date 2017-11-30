@@ -4,14 +4,14 @@
 import {NgModule} from '@angular/core';
 
 import {
-    MdIconModule
+  MdIconModule
   , MdButtonModule
   , MdListModule
   , MdToolbarModule
   , MdTooltipModule
   , MdCardModule
   , MdProgressSpinnerModule
-  , MdInputModule
+  , MdInputModule, MdPaginatorModule, MdChipsModule
 } from "@angular/material";
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -27,7 +27,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdTooltipModule,
     MdCardModule,
     MdProgressSpinnerModule,
-    MdInputModule
+    MdInputModule,
+    MdPaginatorModule,
+    MdChipsModule
   ]
 })
 export class AppMaterialModule {

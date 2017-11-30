@@ -3,14 +3,13 @@
  */
 import {NgModule}             from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardPageComponent} from "../pages/dashboard/dashboard-page.component";
 import {DashboardFetNoHPC1Component} from "../pages/fet-ria-nohpc-1/dashboard-fet-nohpc1.component";
 import {DashboardFetNoHPC2Component} from "../pages/fet-ria-nohpc-2/dashboard-fet-nohpc2.component";
 
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  component: DashboardPageComponent
+  component: DashboardFetNoHPC1Component
 }, {
   path: 'page1',
   pathMatch: 'full',

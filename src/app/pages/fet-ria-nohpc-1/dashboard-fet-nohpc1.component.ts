@@ -3,11 +3,12 @@ import {AppService} from "../../app.service";
 import {Subject} from "rxjs";
 
 import * as _ from "lodash";
+import {PageEvent} from "@angular/material";
 
 @Component({
   selector: 'fet-nohpc1-page',
   templateUrl: './dashboard-fet-nohpc1.component.html',
-  styleUrls:['./dashboard-fet-nohpc1.component.css']
+  styleUrls: ['./dashboard-fet-nohpc1.component.css']
 })
 export class DashboardFetNoHPC1Component implements OnInit {
 
@@ -17,6 +18,7 @@ export class DashboardFetNoHPC1Component implements OnInit {
   public queryString: String;
   public subject: Subject<Array<any>>;
 
+  public initPaginator: PageEvent = new PageEvent();
 
 
   constructor(public service: AppService) {
@@ -39,6 +41,10 @@ export class DashboardFetNoHPC1Component implements OnInit {
       this.documents = object.response.docs;
       this.documentsOnDisplay = object.response.docs;
       this.clusters = this.adaptKeysToFoamTreeFormat(object.clusters);
+      this.initPaginator.length = this.documents.length;
+      this.initPaginator.pageIndex = 0;
+      this.initPaginator.pageSize = 10;
+      this.onPaginateChange(this.initPaginator);
       this.notifyChildren();
     });
   }
@@ -49,7 +55,7 @@ export class DashboardFetNoHPC1Component implements OnInit {
 
   adaptKeysToFoamTreeFormat(clusterArray: Array<any>): Array<any> {
     const targetArray: Array<any> = new Array();
-    if(clusterArray){
+    if (clusterArray) {
       for (const object of clusterArray) {
         const targetObject = {
           label: object.labels[0],
@@ -66,7 +72,7 @@ export class DashboardFetNoHPC1Component implements OnInit {
   getSelectedCluster(data: any) {
     if (data && data.groups) {
       const clusterDocIds = data.groups[0].docs;
-      this.documentsOnDisplay = _.filter(this.documents, function(object){
+      this.documentsOnDisplay = _.filter(this.documents, function (object) {
         return clusterDocIds.includes(object.id);
       })
     }
@@ -76,6 +82,14 @@ export class DashboardFetNoHPC1Component implements OnInit {
   search(data: string) {
     this.queryString = data;
     this.getData();
+  }
+
+  onPaginateChange(event) {
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.documentsOnDisplay = this.documents.slice(startIndex, endIndex);
+    console.log(this.documentsOnDisplay);
+    console.log(event);
   }
 
 }

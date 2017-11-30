@@ -3,6 +3,7 @@ import {AppService} from "../../app.service";
 import {Subject} from "rxjs";
 
 import * as _ from "lodash";
+import {PageEvent} from "@angular/material";
 
 @Component({
   selector: 'fet-nohpc2-page',
@@ -17,7 +18,7 @@ export class DashboardFetNoHPC2Component implements OnInit {
   public queryString: String;
   public subject: Subject<Array<any>>;
 
-
+  public initPaginator: PageEvent = new PageEvent();
 
   constructor(public service: AppService) {
     this.documents = new Array();
@@ -39,6 +40,10 @@ export class DashboardFetNoHPC2Component implements OnInit {
       this.documents = object.response.docs;
       this.documentsOnDisplay = object.response.docs;
       this.clusters = this.adaptKeysToFoamTreeFormat(object.clusters);
+      this.initPaginator.length = this.documents.length;
+      this.initPaginator.pageIndex = 0;
+      this.initPaginator.pageSize = 10;
+      this.onPaginateChange(this.initPaginator);
       this.notifyChildren();
     });
   }
@@ -76,6 +81,14 @@ export class DashboardFetNoHPC2Component implements OnInit {
   search(data: string) {
     this.queryString = data;
     this.getData();
+  }
+
+  onPaginateChange(event) {
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.documentsOnDisplay = this.documents.slice(startIndex, endIndex);
+    console.log(this.documentsOnDisplay);
+    console.log(event);
   }
 
 }

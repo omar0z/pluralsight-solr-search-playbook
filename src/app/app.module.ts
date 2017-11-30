@@ -6,7 +6,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
-import {DashboardPageComponent} from "./pages/dashboard/dashboard-page.component";
 import {AppRoutingModule} from "./modules/app-routing.module";
 import {AppMaterialModule} from "./modules/app-material.module";
 import {AppService} from "./app.service";
@@ -19,7 +18,6 @@ import {ClusterDataService} from "./shared/cluster-data.service";
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardPageComponent,
     DashboardFetNoHPC1Component,
     DashboardFetNoHPC2Component,
     FoamTreeClusteringComponent,
