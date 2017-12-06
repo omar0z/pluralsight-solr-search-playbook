@@ -34,20 +34,20 @@ export class DashboardFetNoHPC1Component implements OnInit {
     this.getData();
   }
 
-  public getData() {
-    this.service.getDataSecondCore(this.queryString).subscribe(result => {
-      const object = result.json();
-      this.queryString = "";
-      this.documents = object.response.docs;
-      this.documentsOnDisplay = object.response.docs;
-      this.clusters = this.adaptKeysToFoamTreeFormat(object.clusters);
-      this.initPaginator.length = this.documents.length;
-      this.initPaginator.pageIndex = 0;
-      this.initPaginator.pageSize = 10;
-      this.onPaginateChange(this.initPaginator);
-      this.notifyChildren();
-    });
-  }
+  // public getData() {
+  //   this.service.getDataSecondCore(this.queryString).subscribe(result => {
+  //     const object = result.json();
+  //     this.queryString = "";
+  //     this.documents = object.response.docs;
+  //     this.documentsOnDisplay = object.response.docs;
+  //     this.clusters = this.adaptKeysToFoamTreeFormat(object.clusters);
+  //     this.initPaginator.length = this.documents.length;
+  //     this.initPaginator.pageIndex = 0;
+  //     this.initPaginator.pageSize = 10;
+  //     this.onPaginateChange(this.initPaginator);
+  //     this.notifyChildren();
+  //   });
+  // }
 
   notifyChildren() {
     this.subject.next(this.clusters);
