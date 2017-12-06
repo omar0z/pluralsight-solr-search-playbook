@@ -1,0 +1,40 @@
+<div id="static">
+  <search (onkeyStroke)="search($event)" style="background-color: white"></search>
+  <clustering [subject]="subject" (onClusterSelected)="getSelectedCluster($event)"></clustering>
+  <md-paginator [length]="documents.length"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPaginateChange($event)"
+                style="padding-top: 10px;"> </md-paginator>
+</div>
+<div fxLayout="column" fxFlex class="content">
+  <div *ngIf="dataFlag == true">
+    <md-card fxFlex *ngFor="let doc of documentsOnDisplay" style="margin-bottom: 20px">
+      <md-card-title>
+        <h3>{{doc.projectAcronym}}</h3>
+        <h5>{{doc.projectTitle}}</h5>
+        <md-chip-list>
+          <md-chip *ngFor="let keyword of doc.keywords_ss">{{keyword}}</md-chip>
+        </md-chip-list>
+      </md-card-title>
+      <md-card-content>
+        {{doc.projectAbstract}}
+      </md-card-content>
+    </md-card>
+  </div>
+  <div *ngIf="dataFlag == false">
+    <md-card fxFlex *ngFor="let doc of documentsOnDisplay" style="margin-bottom: 20px">
+      <md-card-title>
+        <h3>{{doc.proposalAcronym}}</h3>
+        <h5>{{doc.proposalTitle}}</h5>
+        <md-chip-list>
+          <md-chip *ngFor="let keyword of doc.keywords_ss">{{keyword}}</md-chip>
+        </md-chip-list>
+      </md-card-title>
+      <md-card-content>
+        {{doc.proposalAbstract}}
+      </md-card-content>
+    </md-card>
+  </div>
+
+</div>

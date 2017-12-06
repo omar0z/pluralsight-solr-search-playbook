@@ -14,12 +14,14 @@ import {SearchBarComponent} from "./shared/searchbar/searchbar.component";
 import {DashboardFetNoHPC1Component} from "./pages/fet-ria-nohpc-1/dashboard-fet-nohpc1.component";
 import {DashboardFetNoHPC2Component} from "./pages/fet-ria-nohpc-2/dashboard-fet-nohpc2.component";
 import {ClusterDataService} from "./shared/cluster-data.service";
+import {DashboardFetComponent} from "./pages/fet-ria/dashboard-fet.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardFetNoHPC1Component,
     DashboardFetNoHPC2Component,
+    DashboardFetComponent,
     FoamTreeClusteringComponent,
     SearchBarComponent
   ],
