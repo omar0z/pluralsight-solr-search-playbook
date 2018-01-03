@@ -1,1 +1,1 @@
-<div id="foamtree"  style="width: auto; height: 290px; position: sticky;" (window:custom-event)="emitClusterOnHover($event)">Loading clusters..</div>
+<div id="foamtree"  style="width: auto; height: 290px; position: sticky;" (window:onGroupHover)="emitClusterOnHover($event)" (window:onGroupClick)="onFoamtreeContainerClick($event)">Loading clusters..</div>

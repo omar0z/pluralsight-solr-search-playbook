@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ObservableMedia, MediaChange} from "@angular/flex-layout";
 import {Subscription} from "rxjs";
 import {ClusterDataService} from "./shared/cluster-data.service";
@@ -29,8 +29,10 @@ export class AppComponent {
     this.clusterWatcher = this.clusterService.getCluster().subscribe(cluster => {this.clusterOnHover = cluster})
   }
 
+
   public onMenuClick(){
     this.showMenu = !this.showMenu;
   }
+
 
 }

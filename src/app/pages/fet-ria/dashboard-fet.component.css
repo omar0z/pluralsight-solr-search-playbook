@@ -3,6 +3,10 @@
 
 }
 
+.subtitle{
+  color:#90a4ae;
+}
+
 .toolbar{
   background-color: white;
 }
@@ -34,4 +38,10 @@ a:hover {
   -moz-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 30px -6px black;
   padding:25px;
+}
+#toolbox{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content:space-between;
+  padding-top: 10px;
 }

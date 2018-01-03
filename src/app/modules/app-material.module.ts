@@ -11,7 +11,7 @@ import {
   , MdTooltipModule
   , MdCardModule
   , MdProgressSpinnerModule
-  , MdInputModule, MdPaginatorModule, MdChipsModule
+  , MdInputModule, MdPaginatorModule, MdChipsModule, MdDatepickerModule, MdNativeDateModule, MdSelectModule
 } from "@angular/material";
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -29,7 +29,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdProgressSpinnerModule,
     MdInputModule,
     MdPaginatorModule,
-    MdChipsModule
+    MdChipsModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    MdSelectModule,
+    MdProgressSpinnerModule
   ]
 })
 export class AppMaterialModule {

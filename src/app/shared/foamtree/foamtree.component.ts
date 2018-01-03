@@ -42,8 +42,19 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
         },
         onGroupHover: function (info) {
           window.dispatchEvent(new CustomEvent('onClusterHover', {detail: info}));
+        },
+        onGroupClick: function(group){
+          window.dispatchEvent(new CustomEvent('onGroupClick', {detail: group}));
+          //We resize again so it doesn't freeze when a super cluster is clicked
+          window.setTimeout( e => {
+            this.resize();
+          }, 0);
         }
       });
+      //We resize here to prevent the component to freeze on click
+      window.setTimeout( e => {
+        this.foamtree.resize();
+      }, 0);
     });
   }
 
@@ -58,9 +69,9 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('click')
-  onFoamtreeContainerClick() {
-    const selectedCluster = this.foamtree.get("selection");
+  @HostListener('window:onGroupClick', ['$event'])
+  onFoamtreeContainerClick(event) {
+    const selectedCluster = event.detail.group;
     if (selectedCluster) {
       this.onClusterSelected.emit(selectedCluster);
     }
