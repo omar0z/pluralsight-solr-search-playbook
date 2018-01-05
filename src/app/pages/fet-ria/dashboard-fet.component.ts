@@ -22,14 +22,10 @@ export class DashboardFetComponent implements OnInit {
   public subject: Subject<Array<any>>;
   public initPaginator: PageEvent = new PageEvent();
   public deadlineDates = [];
-  public selected: string;
   public isLoading: boolean = true;
 
   @Input()
   public dataFlag: boolean;
-
-  // @Input()
-  // public selectedDate: Subject<number>;
 
 
   constructor(public service: AppService) {
@@ -50,7 +46,6 @@ export class DashboardFetComponent implements OnInit {
     const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
     this.service.getData(this.queryString, this.dataFlag, this.dateString).subscribe(result => {
       const object = result.json();
-      console.log("object: ", object);
       this.transformDatesArray(object.facet_counts.facet_fields[facetsField]);
       this.queryString = "";
       this.documents = object.response.docs;
@@ -68,6 +63,21 @@ export class DashboardFetComponent implements OnInit {
 
   notifyChildren() {
     this.subject.next(this.clusters);
+  }
+
+  setDateString(dateObject: any) {
+    this.dateString = "";
+    if (dateObject) {
+      let index: number = 0;
+      this.dateString = "(";
+      while (index < dateObject.value.length) {
+        this.dateString += (index + 1 == dateObject.value.length) ? "\"" + dateObject.value[index] + "\"" : "\"" + dateObject.value[index] + "\"" + " OR ";
+        index++;
+      }
+      this.dateString += ")";
+    } else {
+      this.dateString = '';
+    }
   }
 
   adaptKeysToFoamTreeFormat(clusterArray: Array<any>): Array<any> {
@@ -93,7 +103,6 @@ export class DashboardFetComponent implements OnInit {
         return clusterDocIds.includes(object.id);
       })
       this.filteredDocuments = this.documentsOnDisplay;
-      this.selected = this.deadlineDates[0].dateString;
     }
 
   }
@@ -118,30 +127,23 @@ export class DashboardFetComponent implements OnInit {
       }
       this.deadlineDates.splice(i, 2, object);
     }
+
+    this.deadlineDates = _.sortBy(this.deadlineDates, [function (date) {
+      return Date.parse(date.dateString)
+    }]);
     let object = {
       dateString: 'All dates',
       matchesCount: 'all'
     }
-    let resetObject = {
-      dateString: 'No date selected',
-      matchesCount: '-'
-    }
     this.deadlineDates.unshift(object);
-    this.deadlineDates.unshift(resetObject);
   }
 
   getDataFromSelectedDate(event) {
-    const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
-    if (!((event.value === 'All dates')||(event.value === 'No date selected'))) {
-      this.filteredDocuments = _.filter(this.documents, function(doc) {
-        console.log(event.value);
-        return doc[facetsField] === event.value;
-      });
-    } else{
-      this.filteredDocuments = this.documents;
+    if (_.includes(event.value, 'All dates')) {
+      event.value = ["All dates"];
+      event.source.value = [event.source.value[0]];
     }
-
-    this.onPaginateChange(this.initPaginator, this.filteredDocuments)
+    this.setDateString(event);
   }
 
 }
