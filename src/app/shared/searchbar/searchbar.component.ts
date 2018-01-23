@@ -23,7 +23,10 @@ export class SearchBarComponent {
     this.term.valueChanges
       .debounceTime(800)
       .distinctUntilChanged()
-      .subscribe(term => this.onkeyStroke.emit(term));
+      .subscribe(term => {
+        this.queryString = term;
+        this.onkeyStroke.emit(term)
+      });
   }
 
   onClick() {

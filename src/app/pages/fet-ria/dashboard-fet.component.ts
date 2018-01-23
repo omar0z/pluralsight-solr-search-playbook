@@ -99,15 +99,19 @@ export class DashboardFetComponent implements OnInit {
   getSelectedCluster(data: any) {
     if (data) {
       const clusterDocIds = data.docs;
-      this.documentsOnDisplay = _.filter(this.documents, function (object) {
-        return clusterDocIds.includes(object.id);
-      })
+      if(clusterDocIds){
+        this.documentsOnDisplay = _.filter(this.documents, function (object) {
+          return clusterDocIds.includes(object.id);
+        })
+      }
+
       this.filteredDocuments = this.documentsOnDisplay;
     }
 
   }
 
   search(data: string) {
+    this.isLoading = true;
     this.queryString = data;
     this.getData();
   }
@@ -119,7 +123,7 @@ export class DashboardFetComponent implements OnInit {
   }
 
   transformDatesArray(sourceArray: Array<any>) {
-    this.deadlineDates = [];
+    if (this.deadlineDates.length > 0) return;
     for (let i = 0; i < sourceArray.length; i = i + 2) {
       let object = {
         dateString: sourceArray[i],

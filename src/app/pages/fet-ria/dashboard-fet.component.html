@@ -8,6 +8,7 @@
                   (page)="onPaginateChange($event, filteredDocuments)"
                   >
     </md-paginator>
+    <button md-raised-button style="margin-right: 10px;" color="primary" (click)="search('*')"><md-icon>home</md-icon> Back to full set</button>
     <md-select placeholder="Select deadline date" style="width:400px;" (change)="getDataFromSelectedDate($event)" (onClose)="getData()" multiple>
       <md-option *ngFor="let date of deadlineDates" [value]="date.dateString">
         {{date.dateString}} ({{date.matchesCount}})
@@ -37,6 +38,7 @@
         <md-card-title>
           <h3>{{doc.proposalAcronym}}</h3>
           <h5>{{doc.proposalTitle}}</h5>
+          <h6 class="subtitle">Self declared keywords: <i>{{doc.proposalFreeKeywords}}</i></h6>
           <md-chip-list>
             <md-chip *ngFor="let keyword of doc.keywords_ss">{{keyword}}</md-chip>
           </md-chip-list>

@@ -17,6 +17,7 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
 
   private foamtree: any;
   private resizeTimeout: number;
+  private clusterClickFlag: boolean = true;
 
   @Input()
   public subject: Subject<Array<any>>;
@@ -71,7 +72,7 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
 
   @HostListener('window:onGroupClick', ['$event'])
   onFoamtreeContainerClick(event) {
-    const selectedCluster = event.detail.group;
+    const selectedCluster =  event.detail.group;
     if (selectedCluster) {
       this.onClusterSelected.emit(selectedCluster);
     }

@@ -22,10 +22,19 @@ export class AppService {
     }
     const solrCore = (flag) ? environment.core2 : environment.core3;
     const schemaField = (flag) ? environment.sourceSchemaField2 : environment.sourceSchemaField1;
+    const schemaField1 = (flag) ? environment.sourceSchemaField2a : environment.sourceSchemaField1a;
+    const schemaField2 = (flag) ? environment.sourceSchemaField2b : environment.sourceSchemaField1b;
+    const schemaField3 = (flag) ? environment.sourceSchemaField2c : environment.sourceSchemaField1c;
     const facetsField = (flag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
 
-    return this.http.get(environment.server+ "solr/"+solrCore+"/clustering?facet.field="+facetsField+"&facet=on&sow=false&indent=on&q="+facetsField+":"+dateString+" AND "+schemaField+":"+queryString+"&wt=json")
-      .map((res: Response) => {
+    return this.http.get(environment.server + "solr/"+solrCore+"/clustering?facet.field="
+      +facetsField+"&facet=on&sow=false&indent=on&q="
+      +"("+facetsField+":"+dateString
+      +") AND ("+schemaField+":"+queryString
+      +" OR "+schemaField1+":"+queryString
+      +" OR "+schemaField2+":"+queryString
+      +" OR "+schemaField3+":"+queryString+")"
+      +"&wt=json").map((res: Response) => {
         return res;
       });
   }
