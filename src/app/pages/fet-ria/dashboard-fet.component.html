@@ -1,56 +1,39 @@
-<div id="static">
+<div id="static" fxFlex="470px">
   <search (onkeyStroke)="search($event)" style="background-color: white"></search>
-  <clustering [subject]="subject" (onClusterSelected)="getSelectedCluster($event)"></clustering>
+  <clustering [clusters]="clusters" (onClusterSelected)="getSelectedCluster($event)"></clustering>
   <div id="toolbox">
-    <md-paginator [length]="filteredDocuments.length"
+    <mat-paginator [length]="filteredDocuments.length"
                   [pageSize]="10"
                   [pageSizeOptions]="[5, 10, 25, 100]"
                   (page)="onPaginateChange($event, filteredDocuments)"
-                  >
-    </md-paginator>
-    <button md-raised-button style="margin-right: 10px;" color="primary" (click)="search('*')"><md-icon>home</md-icon> Back to full set</button>
-    <md-select placeholder="Select deadline date" style="width:400px;" (change)="getDataFromSelectedDate($event)" (onClose)="getData()" multiple>
-      <md-option *ngFor="let date of deadlineDates" [value]="date.dateString">
+    >
+    </mat-paginator>
+    <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="search('*')">
+      <mat-icon>home</mat-icon>
+      Back to full set
+    </button>
+    <mat-select placeholder="Select deadline date" style="width:400px;" (change)="getDataFromSelectedDate($event)"
+               (onClose)="getNewData()" multiple>
+      <mat-option *ngFor="let date of deadlineDates" [value]="date.dateString">
         {{date.dateString}} ({{date.matchesCount}})
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
   </div>
 </div>
-<div fxLayout="column" fxFlex class="content">
+<div fxLayout="column" fxFlex class="content" style="overflow: auto">
   <div *ngIf="isLoading == false">
     <div *ngIf="dataFlag == true">
-      <md-card fxFlex *ngFor="let doc of documentsOnDisplay" style="margin-bottom: 20px">
-        <md-card-title>
-          <h3>{{doc.projectAcronym}}</h3>
-          <h5>{{doc.projectTitle}}</h5>
-          <h6 class="subtitle">Self declared keywords: <i>{{doc.projectFreeKeywords}}</i></h6>
-          <md-chip-list>
-            <md-chip *ngFor="let keyword of doc.keywords_ss">{{keyword}}</md-chip>
-          </md-chip-list>
-        </md-card-title>
-        <md-card-content>
-          {{doc.projectAbstract}}
-        </md-card-content>
-      </md-card>
+      <div *ngFor="let doc of documentsOnDisplay">
+        <document [document]="doc" [dataFlag]="true" (documentEmmit)="search('&quot;'+$event.projectAcronym+'&quot;')"></document>
+      </div>
     </div>
     <div *ngIf="dataFlag == false">
-      <md-card fxFlex *ngFor="let doc of documentsOnDisplay" style="margin-bottom: 20px">
-        <md-card-title>
-          <h3>{{doc.proposalAcronym}}</h3>
-          <h5>{{doc.proposalTitle}}</h5>
-          <h6 class="subtitle">Self declared keywords: <i>{{doc.proposalFreeKeywords}}</i></h6>
-          <md-chip-list>
-            <md-chip *ngFor="let keyword of doc.keywords_ss">{{keyword}}</md-chip>
-          </md-chip-list>
-        </md-card-title>
-        <md-card-content>
-          {{doc.proposalAbstract}}
-        </md-card-content>
-      </md-card>
+      <div *ngFor="let doc of documentsOnDisplay">
+        <document [document]="doc" [dataFlag]="false" (documentEmmit)="search('&quot;'+$event.proposalAcronym+'&quot;')"></document>
+      </div>
     </div>
   </div>
   <div *ngIf="isLoading">
-    <md-spinner></md-spinner>
+    <mat-spinner></mat-spinner>
   </div>
-
 </div>

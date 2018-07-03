@@ -1,10 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import {AppService} from "../../app.service";
 import {Subject} from "rxjs";
-
 import * as _ from "lodash";
 import {PageEvent} from "@angular/material";
 import {environment} from "../../../environments/environment";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'fet-page',
@@ -24,11 +24,12 @@ export class DashboardFetComponent implements OnInit {
   public deadlineDates = [];
   public isLoading: boolean = true;
 
+
   @Input()
   public dataFlag: boolean;
 
 
-  constructor(public service: AppService) {
+  constructor(public service: AppService, public route: ActivatedRoute, public changeRef: ChangeDetectorRef) {
     this.documents = new Array();
     this.filteredDocuments = new Array();
     this.documentsOnDisplay = new Array();
@@ -39,32 +40,54 @@ export class DashboardFetComponent implements OnInit {
 
 
   public ngOnInit() {
-    this.getData();
+
+    let resolvedData = this.route.snapshot.data['data'];
+    this.getData(resolvedData);
   }
 
-  public getData() {
+  public getNewData() {
+    this.deadlineDates = [];
     const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
     this.service.getData(this.queryString, this.dataFlag, this.dateString).subscribe(result => {
-      const object = result.json();
-      this.transformDatesArray(object.facet_counts.facet_fields[facetsField]);
+      this.transformDatesArray(result.facet_counts.facet_fields[facetsField]);
       this.queryString = "";
-      this.documents = object.response.docs;
-      this.filteredDocuments = object.response.docs;
-      this.clusters = this.adaptKeysToFoamTreeFormat(object.clusters);
+      console.log("result: ", result);
+      this.documents = result.response.docs;
+      this.filteredDocuments = result.response.docs;
+      this.clusters = this.adaptKeysToFoamTreeFormat(result.clusters);
       this.initPaginator.length = this.documents.length;
       this.initPaginator.pageIndex = 0;
       this.initPaginator.pageSize = 10;
       this.onPaginateChange(this.initPaginator, this.filteredDocuments);
-
       this.notifyChildren();
       this.isLoading = false;
     });
+  }
+
+  public getData(result: any) {
+    this.deadlineDates = [];
+     console.log("result: ", result);
+    const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
+    this.transformDatesArray(result.facet_counts.facet_fields[facetsField]);
+    this.queryString = "";
+    console.log("result: ", result);
+    this.documents = result.response.docs;
+    this.filteredDocuments = result.response.docs;
+    this.clusters = this.adaptKeysToFoamTreeFormat(result.clusters);
+    this.initPaginator.length = this.documents.length;
+    this.initPaginator.pageIndex = 0;
+    this.initPaginator.pageSize = 10;
+    this.onPaginateChange(this.initPaginator, this.filteredDocuments);
+    this.isLoading = false;
   }
 
   notifyChildren() {
     this.subject.next(this.clusters);
   }
 
+  // setClustersOnCache() {
+  //   this.cache.put('clusters', this.clusters);
+  // }
   setDateString(dateObject: any) {
     this.dateString = "";
     if (dateObject) {
@@ -99,7 +122,7 @@ export class DashboardFetComponent implements OnInit {
   getSelectedCluster(data: any) {
     if (data) {
       const clusterDocIds = data.docs;
-      if(clusterDocIds){
+      if (clusterDocIds) {
         this.documentsOnDisplay = _.filter(this.documents, function (object) {
           return clusterDocIds.includes(object.id);
         })
@@ -111,9 +134,10 @@ export class DashboardFetComponent implements OnInit {
   }
 
   search(data: string) {
+    console.log(data);
     this.isLoading = true;
     this.queryString = data;
-    this.getData();
+    this.getNewData();
   }
 
   onPaginateChange(event, array: Array<any>) {
@@ -149,5 +173,6 @@ export class DashboardFetComponent implements OnInit {
     }
     this.setDateString(event);
   }
+
 
 }

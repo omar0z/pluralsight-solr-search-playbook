@@ -5,6 +5,9 @@ import { Component, EventEmitter, Output } from "@angular/core";
 
 import { FormControl } from "@angular/forms";
 
+import {debounceTime} from "rxjs/operators/debounceTime";
+import {distinctUntilChanged} from "rxjs/operators/distinctUntilChanged";
+
 /**
  * Created by perezom on 25/09/2017.
  */
@@ -20,10 +23,10 @@ export class SearchBarComponent {
   @Output() onkeyStroke: EventEmitter<any> = new EventEmitter();
 
   constructor() {
-    this.term.valueChanges
-      .debounceTime(800)
-      .distinctUntilChanged()
-      .subscribe(term => {
+    this.term.valueChanges.pipe(
+      debounceTime(800),
+      distinctUntilChanged()
+    ).subscribe(term => {
         this.queryString = term;
         this.onkeyStroke.emit(term)
       });

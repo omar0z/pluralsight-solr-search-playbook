@@ -4,14 +4,14 @@
 import {NgModule} from '@angular/core';
 
 import {
-  MdIconModule
-  , MdButtonModule
-  , MdListModule
-  , MdToolbarModule
-  , MdTooltipModule
-  , MdCardModule
-  , MdProgressSpinnerModule
-  , MdInputModule, MdPaginatorModule, MdChipsModule, MdDatepickerModule, MdNativeDateModule, MdSelectModule
+  MatIconModule
+  , MatButtonModule
+  , MatListModule
+  , MatToolbarModule
+  , MatTooltipModule
+  , MatCardModule
+  , MatProgressSpinnerModule
+  , MatInputModule, MatPaginatorModule, MatChipsModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule
 } from "@angular/material";
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -20,20 +20,20 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   imports: [],
   exports: [
     BrowserAnimationsModule,
-    MdIconModule,
-    MdButtonModule,
-    MdListModule,
-    MdToolbarModule,
-    MdTooltipModule,
-    MdCardModule,
-    MdProgressSpinnerModule,
-    MdInputModule,
-    MdPaginatorModule,
-    MdChipsModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdSelectModule,
-    MdProgressSpinnerModule
+    MatIconModule,
+    MatButtonModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AppMaterialModule {

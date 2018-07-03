@@ -1,7 +1,6 @@
 import {
-  Component, Input, HostListener, OnDestroy, OnInit, EventEmitter, Output
+  Component, Input, HostListener, OnInit, EventEmitter, Output, OnChanges, SimpleChanges
 } from "@angular/core";
-import {Subject} from "rxjs";
 import {ClusterDataService} from "../cluster-data.service";
 
 /**
@@ -13,14 +12,16 @@ declare var CarrotSearchFoamTree: any;
   selector: 'clustering',
   templateUrl: './foamtree.component.html',
 })
-export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
+export class FoamTreeClusteringComponent implements OnInit, OnChanges {
 
   private foamtree: any;
-  private resizeTimeout: number;
-  private clusterClickFlag: boolean = true;
+  // private resizeTimeout: number;
+  // private clusterClickFlag: boolean = true;
+
 
   @Input()
-  public subject: Subject<Array<any>>;
+  public clusters: any;
+
   @Output()
   onClusterSelected: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -28,51 +29,31 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
 
 
   constructor(private clusterService: ClusterDataService) {
+    //console.log("*** constructor ***");
   }
 
   ngOnInit() {
-    this.subject.subscribe(event => {
-      if (this.foamtree) {
-        this.foamtree.dispose();
-      }
-
-      this.foamtree = new CarrotSearchFoamTree({
-        id: 'foamtree',
-        dataObject: {
-          groups: event
-        },
-        onGroupHover: function (info) {
-          window.dispatchEvent(new CustomEvent('onClusterHover', {detail: info}));
-        },
-        onGroupClick: function(group){
-          window.dispatchEvent(new CustomEvent('onGroupClick', {detail: group}));
-          //We resize again so it doesn't freeze when a super cluster is clicked
-          window.setTimeout( e => {
-            this.resize();
-          }, 0);
-        }
-      });
-      //We resize here to prevent the component to freeze on click
-      window.setTimeout( e => {
-        this.foamtree.resize();
-      }, 0);
-    });
+    this.foamtreeSetup();
   }
 
-  ngOnDestroy() {
-    this.subject.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("changes: ", changes);
+    this.clusters = changes.clusters.currentValue;
+    this.foamtreeSetup();
   }
+
+  //*********** Listeners **************
 
   @HostListener('window:resize')
   onWindowResize() {
     if (this.foamtree) {
-        this.foamtree.resize();
+      this.foamtree.resize();
     }
   }
 
   @HostListener('window:onGroupClick', ['$event'])
   onFoamtreeContainerClick(event) {
-    const selectedCluster =  event.detail.group;
+    const selectedCluster = event.detail.group;
     if (selectedCluster) {
       this.onClusterSelected.emit(selectedCluster);
     }
@@ -87,6 +68,9 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  //****** Functions ******
+
   calculateTotalDocs(clusterObj: any): number {
     if (clusterObj.groups.length == 0) {
       return clusterObj.docs.length;
@@ -98,5 +82,31 @@ export class FoamTreeClusteringComponent implements OnInit, OnDestroy {
       return docs;
     }
 
+  }
+
+  foamtreeSetup() {
+    if (this.foamtree) {
+      this.foamtree.dispose();
+    }
+    this.foamtree = new CarrotSearchFoamTree({
+      id: 'foamtree',
+      dataObject: {
+        groups: this.clusters
+      },
+      onGroupHover: function (info) {
+        window.dispatchEvent(new CustomEvent('onClusterHover', {detail: info}));
+      },
+      onGroupClick: function (group) {
+        window.dispatchEvent(new CustomEvent('onGroupClick', {detail: group}));
+        //We resize again so it doesn't freeze when a super cluster is clicked
+        window.setTimeout(e => {
+          this.resize();
+        }, 0);
+      }
+    });
+    //We resize here to prevent the component to freeze on click
+    window.setTimeout(e => {
+      this.foamtree.resize();
+    }, 0);
   }
 }

@@ -3,13 +3,13 @@
     <div fxLayoutAlign="center center" fxFlex.gt-sm="250px" class="header-logo"><img src="assets/images/DORIS.png"/>
     </div>
     <div fxFlex fxLayoutAlign="start center">
-      <button (click)="onMenuClick()" mdTooltip="Show/Hide Menu" md-button class="menu-button">
-        <md-icon>menu</md-icon>
+      <button (click)="onMenuClick()" matTooltip="Show/Hide Menu" mat-button class="menu-button">
+        <mat-icon>menu</mat-icon>
       </button>
     </div>
     <div fxFlex fxLayoutAlign="end center" class="menu-right">
-      <button md-button class="menu-button">
-        <md-icon class="md-48">account_circle</md-icon>
+      <button mat-button class="menu-button">
+        <mat-icon class="mat-48">account_circle</mat-icon>
       </button>
     </div>
   </div>
@@ -17,30 +17,33 @@
     <div class="doris-dark-theme sidebar"
          [ngClass]="{'mobile': showMenu && (activeMediaQuery=='xs' || activeMediaQuery=='sm')}" *ngIf="showMenu">
 
-      <md-nav-list class="static" style="top:80px">
-        <md-list-item routerLink="/page1" routerLinkActive="nav-active">
-          <md-icon md-list-icon>dashboard</md-icon>
-          <h3 md-line> FET Projects H2020 </h3>
-        </md-list-item>
-        <md-list-item routerLink="/page2" routerLinkActive="nav-active">
-          <md-icon md-list-icon>dashboard</md-icon>
-          <h3 md-line> FET Proposals H2020 </h3>
-        </md-list-item>
-      </md-nav-list>
+      <mat-nav-list class="static" style="top:80px">
+        <mat-list-item routerLink="/page1" routerLinkActive="nav-active">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <h3 mat-line> FET Projects H2020 </h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/page2" routerLinkActive="nav-active">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <h3 mat-line> FET Proposals H2020 </h3>
+        </mat-list-item>
+      </mat-nav-list>
 
 
-      <md-card *ngIf="clusterOnHover !== undefined" class="static" style="margin-top: 50px; top:305px">
+      <mat-card *ngIf="clusterOnHover !== undefined" class="static" style="margin-top: 50px; top:305px">
         <ul>
           <li>Last cluster on hover: {{clusterOnHover.label}}</li>
           <li>Number of sub-clusters: {{clusterOnHover.groups.length}}</li>
           <li>Total documents: {{clusterOnHover.nbOfDocs}}</li>
         </ul>
-      </md-card>
+      </mat-card>
 
 
     </div>
-    <div fxFlex class="content">
-      <router-outlet></router-outlet>
+    <div fxFlexLayout="column" fxFlex class="content" >
+      <div *ngIf="loading" style="display: flex; justify-content: center; align-items: center; margin-top: 30%" >
+        <mat-spinner></mat-spinner>
+      </div>
+      <router-outlet *ngIf="!loading"></router-outlet>
     </div>
   </div>
 </div>

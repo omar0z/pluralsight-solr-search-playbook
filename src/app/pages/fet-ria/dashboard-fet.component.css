@@ -29,9 +29,6 @@ a:hover {
 }
 
 #static {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 60px;
   z-index: 1000; /*ridiculous value to ensure layering*/
   background-color: white;
   -webkit-box-shadow: 0 8px 6px -6px black;

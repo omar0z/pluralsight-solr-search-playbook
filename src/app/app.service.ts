@@ -5,19 +5,20 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Rx";
 import {environment} from "../environments/environment";
-import {Http, Response} from "@angular/http";
+import {HttpClient, HttpResponse, HttpParams} from "@angular/common/http";
+import {map} from "rxjs/operators/map";
 
 @Injectable()
 export class AppService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
-  public getData(queryString : string, flag: boolean, dateString: string): Observable<any> {
-    if(!queryString){
+  public getData(queryString: string, flag: boolean, dateString: string): Observable<any> {
+    if (!queryString) {
       queryString = "*";
     }
-    if(!dateString || dateString === "(\"All dates\")"){
+    if (!dateString || dateString === "(\"All dates\")") {
       dateString = "*";
     }
     const solrCore = (flag) ? environment.core2 : environment.core3;
@@ -27,16 +28,35 @@ export class AppService {
     const schemaField3 = (flag) ? environment.sourceSchemaField2c : environment.sourceSchemaField1c;
     const facetsField = (flag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
 
-    return this.http.get(environment.server + "solr/"+solrCore+"/clustering?facet.field="
-      +facetsField+"&facet=on&sow=false&indent=on&q="
-      +"("+facetsField+":"+dateString
-      +") AND ("+schemaField+":"+queryString
-      +" OR "+schemaField1+":"+queryString
-      +" OR "+schemaField2+":"+queryString
-      +" OR "+schemaField3+":"+queryString+")"
-      +"&wt=json").map((res: Response) => {
-        return res;
-      });
+    const httpOptions = {
+      params: new HttpParams()
+        .set('facet.field', facetsField)
+        .set('facet', 'on')
+        .set('sow', 'false')
+        .set('indent', 'on')
+        .set('q', "(" + facetsField + ":" + dateString + ") AND (" + schemaField + ":" + queryString + " OR " + schemaField1 + ":" + queryString + " OR " + schemaField2 + ":" + queryString + " OR " + schemaField3 + ":" + queryString + ")")
+        .set('hl.fl', schemaField1 + " " + schemaField1 + " " + schemaField2 + " " + schemaField3)
+        .set('hl', 'on')
+        .set('wt', 'json')
+    }
+
+
+    return this.http.get(environment.server + "solr/" + solrCore + "/clustering", httpOptions).pipe(
+      map((res: HttpResponse<any>) => {
+          return res;
+        }
+      )
+    );
+  }
+
+  public getMoreLikeThisData(doc: any, flag: boolean): Observable < any > {
+    const solrCore = (flag) ? environment.core2 : environment.core3;
+    const docId = (flag) ? doc.projectId : doc.proposalNumber;
+    const id = (flag) ? 'projectId' : 'proposalNumber';
+
+    return this.http.get(environment.server + "solr/" + solrCore + "/mlt?indent=on&q="
+      + id + ":" + docId
+      + "&rows=5&wt=json");
   }
 
 }

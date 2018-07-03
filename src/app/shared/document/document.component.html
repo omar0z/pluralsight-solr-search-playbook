@@ -1,0 +1,50 @@
+<div >
+  <mat-card fxFlex style="margin-bottom: 20px" *ngIf="dataFlag == true">
+    <mat-card-title>
+      <h3>{{document.projectAcronym}}</h3>
+      <h5>{{document.projectTitle}}</h5>
+      <h6 style=" color:#90a4ae;">Self declared keywords: <i>{{document.projectFreeKeywords}}</i></h6>
+      <mat-chip-list>
+        <mat-chip *ngFor="let keyword of document.keywords_ss">{{keyword}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-title>
+    <mat-card-content>
+      {{document.projectAbstract}}
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="searchRelatedDocuments()">
+        <mat-icon>star</mat-icon>
+        Related projects
+      </button>
+      <div style="padding:20px" *ngIf="moreLikeThisFlag">
+        <ul *ngFor="let doc of moreLikeThisDocs">
+          <li class="mlt" (click)="emitRelevantDocument(doc)">{{doc.projectTitle}}</li>
+        </ul>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card fxFlex style="margin-bottom: 20px" *ngIf="dataFlag == false">
+    <mat-card-title>
+      <h3>{{document.proposalAcronym}}</h3>
+      <h5>{{document.proposalTitle}}</h5>
+      <h6 style=" color:#90a4ae;">Self declared keywords: <i>{{document.proposalFreeKeywords}}</i></h6>
+      <mat-chip-list>
+        <mat-chip *ngFor="let keyword of document.keywords_ss">{{keyword}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-title>
+    <mat-card-content>
+      {{document.proposalAbstract}}
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="searchRelatedDocuments()">
+        <mat-icon>star</mat-icon>
+        Related proposals
+      </button>
+      <div style="padding:20px" *ngIf="moreLikeThisFlag">
+        <ul *ngFor="let doc of moreLikeThisDocs">
+          <li class="mlt" (click)="emitRelevantDocument(doc)">{{doc.proposalTitle}}</li>
+        </ul>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>
