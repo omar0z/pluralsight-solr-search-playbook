@@ -1,22 +1,9 @@
-# DORIS Clustering Webapp
+# Pluralsight course: Apache Solr Search Playbook
 
-This project has the purpose to serve as base to visualize DORIS clustering applications.
-
-## MEAN Application technologies
-- MongoDB
-- Express for NodeJS
-- Angular 4 with Typescript
-- NodeJS with Typescript
-
-## Others libraries
-- [Angular Material](https://material.angular.io/)
-- [Flex Layout](https://github.com/angular/flex-layout/wiki) 
-- [Doris UI Components Integration](http://s-cnect-gitlab.cnect.cec.eu.int/doris/doris-ui-components)
-- Custom Material Theme(light and dark)
-- EU Login integration with NodeJS
+This project has the purpose to serve as base to visualize your Solr searches in the context of the Pluralsight course: Apache Solr Search Playbook.
 
 ## Details
-This project was generated with angular-cli and contains the base with the homepage and DORIS logo to initiate the application and the integration with EU Login in NodeJS side.
+This project was generated with angular-cli and provides support for working with the course content. In the course, it is not required that you edit this application, however you are totally free to do so.
 
 ## Before you run the application
 Make sure you install the app dependencies by running `yarn install`. If you skip this step, the app won't run in any environment.
@@ -24,31 +11,6 @@ Make sure you install the app dependencies by running `yarn install`. If you ski
 ## Development Environment
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `npm run start-server` for a dev server. Navigate to `http://localhost:3000/`.
+#Any Issues?
 
-## Emulate Prod on Dev
-Build using `npm run build-prod`. This will generate the dist/client folder.
-
-Run `npm run start-server-prod`. Navigate to `http://localhost:3000/`.
-
-## Build
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Customizing the tool
-
-Edit the `enviroments.ts` file to input:
-- The address of your solr instance
-- Your Solr core
-- The source text field where the clustering will be based on
-
-Edit the `dashboard-page.component.html` to customize the view bindings according to your Solr schema. The tool is already configured to fetch, display and iterate over your data (`*ngFor="let doc of documentsOnDisplay"`). Just use the angular notation (`{{doc.your_field_here}}`) to create the necessary bindings on the card title and on the card content to get started!.
-
-## Any problem?
-Contact us! : CNECT-ECDORIS@ec.europa.eu
+Contact me: Twitter @omar0z 
