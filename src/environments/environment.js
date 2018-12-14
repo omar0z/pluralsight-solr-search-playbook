@@ -5,6 +5,6 @@
 "use strict";
 exports.environment = {
     production: false,
-    server: "http://s-cnect-dev-crwl:8983/"
+    server: "http://localhost:8983/"
 };
 //# sourceMappingURL=environment.js.map

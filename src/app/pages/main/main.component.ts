@@ -7,11 +7,11 @@ import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'fet-page',
-  templateUrl: './dashboard-fet.component.html',
-  styleUrls: ['./dashboard-fet.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class DashboardFetComponent implements OnInit {
+export class MainComponent implements OnInit {
 
   public documents: Array<any>;
   public filteredDocuments: Array<any>;
@@ -47,7 +47,7 @@ export class DashboardFetComponent implements OnInit {
 
   public getNewData() {
     this.deadlineDates = [];
-    const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
+    const facetsField = environment.sourceFacetsField1;
     this.service.getData(this.queryString, this.dataFlag, this.dateString).subscribe(result => {
       this.transformDatesArray(result.facet_counts.facet_fields[facetsField]);
       this.queryString = "";
@@ -67,7 +67,7 @@ export class DashboardFetComponent implements OnInit {
   public getData(result: any) {
     this.deadlineDates = [];
      console.log("result: ", result);
-    const facetsField = (this.dataFlag) ? environment.sourceFacetsField2 : environment.sourceFacetsField1;
+    const facetsField = environment.sourceFacetsField1;
     this.transformDatesArray(result.facet_counts.facet_fields[facetsField]);
     this.queryString = "";
     console.log("result: ", result);

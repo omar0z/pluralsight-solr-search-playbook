@@ -1,6 +1,7 @@
-<div id="static" fxFlex="470px">
+<!-- fxFlex="470px" -->
+<div id="static" >
   <search (onkeyStroke)="search($event)" style="background-color: white"></search>
-  <clustering [clusters]="clusters" (onClusterSelected)="getSelectedCluster($event)"></clustering>
+  <!-- <clustering [clusters]="clusters" (onClusterSelected)="getSelectedCluster($event)"></clustering> -->
   <div id="toolbox">
     <mat-paginator [length]="filteredDocuments.length"
                   [pageSize]="10"
@@ -10,14 +11,7 @@
     </mat-paginator>
     <button mat-raised-button style="margin-right: 10px;" color="primary" (click)="search('*')">
       <mat-icon>home</mat-icon>
-      Back to full set
     </button>
-    <mat-select placeholder="Select deadline date" style="width:400px;" (change)="getDataFromSelectedDate($event)"
-               (onClose)="getNewData()" multiple>
-      <mat-option *ngFor="let date of deadlineDates" [value]="date.dateString">
-        {{date.dateString}} ({{date.matchesCount}})
-      </mat-option>
-    </mat-select>
   </div>
 </div>
 <div fxLayout="column" fxFlex class="content" style="overflow: auto">

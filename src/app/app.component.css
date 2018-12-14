@@ -3,8 +3,8 @@
 }
 
 .header {
-  height: 60px;
-  background-color: #2cabe3;
+  height: 100px;
+  background-color: #ffffff;
   position: -webkit-sticky;
   position: sticky;
   top: 0;

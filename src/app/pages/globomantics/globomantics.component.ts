@@ -3,10 +3,10 @@ import {Input} from "@angular/core";
 import {Subject} from "rxjs";
 
 @Component({
-  selector: 'fet-nohpc1-page',
-  templateUrl: './dashboard-fet-nohpc1.component.html'
+  selector: 'app-globomantics',
+  templateUrl: './globomantics.component.html'
 })
-export class DashboardFetNoHPC1Component {
+export class GlobomanticsComponent {
 
   // @Input()
   // public selectedDate : Subject<number> = new Subject();
